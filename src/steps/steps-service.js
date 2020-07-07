@@ -1,6 +1,6 @@
 const StepsServices = {
     getAllSteps(knex) {
-        return knex.select('*').from('tbl_tutos_steps')
+        return knex.select('*').from('tbl_tours_steps')
     },
 
     insertStep(knex, newStep) {

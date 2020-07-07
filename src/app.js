@@ -4,24 +4,24 @@ const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
-const validateBearerToken = require('./validate-bearer-token')
+//const validateBearerToken = require('./validate-bearer-token')
 const errorHandler = require('./error-handler')
+const app = express()
 
 const usersRouter = require('./users/users-router')
 const tutorialsRouter = require('./tutorials/tutorials-router')
 const stepsRouter = require('./steps/steps-router')
 
-const app = express()
-
 app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
     skip: () => NODE_ENV === 'test'
 }))
+
 app.use(cors())
 app.use(helmet())
-app.use(validateBearerToken)
+//app.use(validateBearerToken)
 
-app.use('/api/user',usersRouter)
-app.use('/api/tutorial',tutorialsRouter)
+app.use('/api/users',usersRouter)
+app.use('/api/tutorials',tutorialsRouter)
 app.use('/api/steps',stepsRouter)
 
 app.get('/', (req, res) => {

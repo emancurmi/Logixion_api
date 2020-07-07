@@ -1,7 +1,7 @@
 const path = require('path')
 const express = require('express')
 const xss = require('xss')
-const UsersServices = require('./users-services')
+const UsersServices = require('./users-service')
 
 const usersRouter = express.Router()
 const jsonParser = express.json()
@@ -10,6 +10,7 @@ usersRouter
     .route('/')
     .get((req, res, next) => {
         const knexInstance = req.app.get('db')
+        console.log(req.app.get('db'));
         UsersServices.getAllUsers(knexInstance)
             .then(users => {
                 res.json(users)
@@ -47,7 +48,7 @@ usersRouter
     .all((req, res, next) => {
         UsersServices.getById(
             req.app.get('db'),
-            req.params.article_id
+            req.params.user_id
         )
             .then(user => {
                 if (!user) {
@@ -63,6 +64,8 @@ usersRouter
     .get((req, res, next) => {
         res.json({
             id: res.user.id,
+            username: res.user.username,
+            password: res.user.password,
         })
     })
     .delete((req, res, next) => {

@@ -1,18 +1,27 @@
 const path = require('path')
 const express = require('express')
 const xss = require('xss')
-const StepsServices = require('./steps-services')
+const StepsServices = require('./steps-service')
 
 const stepsRouter = express.Router()
 const jsonParser = express.json()
 
+
+const serializeSteps = step => ({
+    id: step.id,
+    element: step.element,
+    placement: step.placement,
+    title: step.title,
+    content: step.content
+})
+
+
 stepsRouter
     .route('/')
     .get((req, res, next) => {
-        const knexInstance = req.app.get('db')
-        StepsServices.getAllSteps(knexInstance)
+        StepsServices.getAllSteps(req.app.get('db'))
             .then(steps => {
-                res.json(steps)
+                res.json(steps.map(serializeSteps))
             })
             .catch(next)
     })
@@ -47,7 +56,7 @@ stepsRouter
     .all((req, res, next) => {
         StepsServices.getById(
             req.app.get('db'),
-            req.params.article_id
+            req.params.step_id
         )
             .then(step => {
                 if (!step) {
@@ -63,6 +72,10 @@ stepsRouter
     .get((req, res, next) => {
         res.json({
             id: res.step.id,
+            element: res.step.element,
+            placement: res.step.placement,
+            title: res.step.title,
+            content: res.step.content,
         })
     })
     .delete((req, res, next) => {

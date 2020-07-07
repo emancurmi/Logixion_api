@@ -1,7 +1,7 @@
 const path = require('path')
 const express = require('express')
 const xss = require('xss')
-const TutorialsServices = require('./tutorials-services')
+const TutorialsServices = require('./tutorials-service')
 
 const tutorialsRouter = express.Router()
 const jsonParser = express.json()
@@ -47,7 +47,7 @@ tutorialsRouter
     .all((req, res, next) => {
         TutorialsServices.getById(
             req.app.get('db'),
-            req.params.article_id
+            req.params.tutorial_id
         )
             .then(tutorial => {
                 if (!tutorial) {
@@ -63,6 +63,7 @@ tutorialsRouter
     .get((req, res, next) => {
         res.json({
             id: res.tutorial.id,
+            name: res.tutorial.name,
         })
     })
     .delete((req, res, next) => {
