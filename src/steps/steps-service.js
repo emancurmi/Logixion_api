@@ -3,6 +3,10 @@ const StepsServices = {
         return knex.select('*').from('tbl_tours_steps')
     },
 
+    getAllStepsbyTutorialId(knex, tutorialid) {
+        return knex.select('*').from('tbl_tours_steps').where('tutorialid', tutorialid)
+    },
+
     insertStep(knex, newStep) {
         return knex
             .insert(newStep)

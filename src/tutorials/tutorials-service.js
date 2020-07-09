@@ -3,6 +3,10 @@ const TutorialsServices = {
         return knex.select('*').from('tbl_tours_tutorials')
     },
 
+    getAllTutorialsbyUserId(knex, userid) {
+        return knex.select('*').from('tbl_tours_tutorials').where('userid', userid)
+    },
+
     insertTutorial(knex, newTutorial) {
         return knex
             .insert(newTutorial)

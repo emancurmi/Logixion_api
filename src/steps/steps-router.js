@@ -12,22 +12,36 @@ const serializeSteps = step => ({
     element: step.element,
     placement: step.placement,
     title: step.title,
-    content: step.content
+    content: step.content,
+    tutorialid: step.tutorialid
 })
 
 
 stepsRouter
     .route('/')
     .get((req, res, next) => {
-        StepsServices.getAllSteps(req.app.get('db'))
-            .then(steps => {
-                res.json(steps.map(serializeSteps))
-            })
-            .catch(next)
+        var qtutorialid = req.query.tutorialid || "";
+        //tutorialid 
+        if (qtutorialid != "") {
+            StepsServices.getAllStepsbyTutorialId(req.app.get('db'), qtutorialid)
+                .then(steps => {
+                    res.json(steps)
+                })
+                .catch(next)
+        }
+        //if its empty
+        else {
+            StepsServices.getAllSteps(req.app.get('db'))
+                .then(steps => {
+                    res.json(steps)
+                })
+                .catch(next)
+        }
     })
+//req.query.params."search"/"step"
     .post(jsonParser, (req, res, next) => {
-        const { element, placement, title, content } = req.body
-        const newStep = { element, placement, title, content }
+        const { element, placement, title, content, tutorialid } = req.body
+        const newStep = { element, placement, title, content, tutorialid }
 
         for (const [key, value] of Object.entries(newStep)) {
             if (value == null) {
@@ -76,6 +90,7 @@ stepsRouter
             placement: res.step.placement,
             title: res.step.title,
             content: res.step.content,
+            tutorialid: res.step.tutorialid
         })
     })
     .delete((req, res, next) => {
@@ -89,8 +104,8 @@ stepsRouter
             .catch(next)
     })
     .patch(jsonParser, (req, res, next) => {
-        const { element, placement, title, content } = req.body
-        const stepToUpdate = { element, placement, title, content }
+        const { element, placement, title, content, tutorialid } = req.body
+        const stepToUpdate = { element, placement, title, content, tutorialid }
 
         const numberOfValues = Object.values(stepToUpdate).filter(Boolean).length
         if (numberOfValues === 0) {
@@ -111,6 +126,8 @@ stepsRouter
             })
             .catch(next)
     })
+
+//api.google.com/steps?search=x
 
 
 module.exports = stepsRouter

@@ -6,19 +6,35 @@ const TutorialsServices = require('./tutorials-service')
 const tutorialsRouter = express.Router()
 const jsonParser = express.json()
 
+const serializeTutorials = step => ({
+    id: tutorial.id,
+    name: tutorial.name,
+    userid: tutorial.userid
+})
+
 tutorialsRouter
     .route('/')
     .get((req, res, next) => {
-        const knexInstance = req.app.get('db')
-        TutorialsServices.getAllTutorials(knexInstance)
-            .then(tutorials => {
-                res.json(tutorials)
-            })
-            .catch(next)
+        var quserid = req.query.userid || "";
+
+        if (quserid != "") {
+            TutorialsServices.getAllTutorialsbyUserId(req.app.get('db'), quserid)
+                .then(tutorials => {
+                    res.json(tutorials)
+                })
+                .catch(next)
+        }
+        else {
+            TutorialsServices.getAllTutorials(req.app.get('db'))
+                .then(tutorials => {
+                    res.json(tutorials)
+                })
+                .catch(next)
+        }
     })
     .post(jsonParser, (req, res, next) => {
-        const { name } = req.body
-        const newTutorial = { name }
+        const { name, userid } = req.body
+        const newTutorial = { name, userid }
 
         for (const [key, value] of Object.entries(newTutorial)) {
             if (value == null) {
@@ -64,6 +80,7 @@ tutorialsRouter
         res.json({
             id: res.tutorial.id,
             name: res.tutorial.name,
+            userid: res.tutorial.userid
         })
     })
     .delete((req, res, next) => {
@@ -77,8 +94,8 @@ tutorialsRouter
             .catch(next)
     })
     .patch(jsonParser, (req, res, next) => {
-        const { name } = req.body
-        const tutorialToUpdate = { name }
+        const { name, userid } = req.body
+        const tutorialToUpdate = { name, userid }
 
         const numberOfValues = Object.values(tutorialToUpdate).filter(Boolean).length
         if (numberOfValues === 0) {
