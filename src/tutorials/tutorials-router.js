@@ -1,6 +1,5 @@
 const path = require('path')
 const express = require('express')
-const xss = require('xss')
 const TutorialsServices = require('./tutorials-service')
 
 const tutorialsRouter = express.Router()
@@ -116,6 +115,5 @@ tutorialsRouter
             })
             .catch(next)
     })
-
 
 module.exports = tutorialsRouter

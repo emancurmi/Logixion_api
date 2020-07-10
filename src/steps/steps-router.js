@@ -1,20 +1,9 @@
 const path = require('path')
 const express = require('express')
-const xss = require('xss')
 const StepsServices = require('./steps-service')
 
 const stepsRouter = express.Router()
 const jsonParser = express.json()
-
-
-const serializeSteps = step => ({
-    id: step.id,
-    element: step.element,
-    placement: step.placement,
-    title: step.title,
-    content: step.content,
-    tutorialid: step.tutorialid
-})
 
 
 stepsRouter
@@ -38,7 +27,6 @@ stepsRouter
                 .catch(next)
         }
     })
-//req.query.params."search"/"step"
     .post(jsonParser, (req, res, next) => {
         const { element, placement, title, content, tutorialid } = req.body
         const newStep = { element, placement, title, content, tutorialid }
@@ -126,8 +114,5 @@ stepsRouter
             })
             .catch(next)
     })
-
-//api.google.com/steps?search=x
-
 
 module.exports = stepsRouter

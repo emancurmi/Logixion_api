@@ -7,6 +7,10 @@ const TutorialsServices = {
         return knex.select('*').from('tbl_tours_tutorials').where('userid', userid)
     },
 
+    getById(knex, id) {
+        return knex.from('tbl_tours_tutorials').select('*').where('id', id).first()
+    },
+
     insertTutorial(knex, newTutorial) {
         return knex
             .insert(newTutorial)
@@ -15,10 +19,6 @@ const TutorialsServices = {
             .then(rows => {
                 return rows[0]
             })
-    },
-
-    getById(knex, id) {
-        return knex.from('tbl_tours_tutorials').select('*').where('id', id).first()
     },
 
     deleteTutorial(knex, id) {

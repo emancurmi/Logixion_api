@@ -7,6 +7,10 @@ const StepsServices = {
         return knex.select('*').from('tbl_tours_steps').where('tutorialid', tutorialid)
     },
 
+    getById(knex, id) {
+        return knex.from('tbl_tours_steps').select('*').where('id', id).first()
+    },
+
     insertStep(knex, newStep) {
         return knex
             .insert(newStep)
@@ -15,10 +19,6 @@ const StepsServices = {
             .then(rows => {
                 return rows[0]
             })
-    },
-
-    getById(knex, id) {
-        return knex.from('tbl_tours_steps').select('*').where('id', id).first()
     },
 
     deleteStep(knex, id) {
