@@ -66,8 +66,8 @@ stepsRouter
                         error: { message: `Step doesn't exist` }
                     })
                 }
-                res.step = step // save the article for the next middleware
-                next() // don't forget to call next so the next middleware happens!
+                res.step = step 
+                next() 
             })
             .catch(next)
     })
@@ -92,14 +92,13 @@ stepsRouter
             .catch(next)
     })
     .patch(jsonParser, (req, res, next) => {
-        const { element, placement, title, content, tutorialid } = req.body
-        const stepToUpdate = { element, placement, title, content, tutorialid }
-
+        const { element, placement, title, content } = req.body
+        const stepToUpdate = { element, placement, title, content }
         const numberOfValues = Object.values(stepToUpdate).filter(Boolean).length
         if (numberOfValues === 0) {
             return res.status(400).json({
                 error: {
-                    message: `Request body must contain either 'title'`
+                    message: numberOFValues
                 }
             })
         }

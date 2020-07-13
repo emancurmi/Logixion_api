@@ -11,6 +11,7 @@ const app = express()
 const usersRouter = require('./users/users-router')
 const tutorialsRouter = require('./tutorials/tutorials-router')
 const stepsRouter = require('./steps/steps-router')
+const GenerateTutorialRouter = require('./generatetutorial/generate-router')
 
 app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
     skip: () => NODE_ENV === 'test'
@@ -22,7 +23,8 @@ app.use(helmet())
 
 app.use('/api/users',usersRouter)
 app.use('/api/tutorials',tutorialsRouter)
-app.use('/api/steps',stepsRouter)
+app.use('/api/steps', stepsRouter)
+app.use('/api/generatetutorial', GenerateTutorialRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello, world!')

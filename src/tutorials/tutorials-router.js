@@ -43,7 +43,7 @@ tutorialsRouter
             }
         }
 
-        newTutorial.title = title
+        newTutorial.name = name
         TutorialsServices.insertTutorial(
             req.app.get('db'),
             newTutorial
