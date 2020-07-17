@@ -15,4 +15,4 @@ helpRouter
         
     })
     
-module.exports = stepsRouter
+module.exports = helpRouter
