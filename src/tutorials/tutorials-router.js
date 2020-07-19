@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const TutorialsServices = require('./tutorials-service')
+const TutorialStepsServices = require ('./tutorialsteps-service')
 
 const tutorialsRouter = express.Router()
 const jsonParser = express.json()
@@ -87,10 +88,17 @@ tutorialsRouter
             req.app.get('db'),
             req.params.tutorial_id
         )
+
+        TutorialStepsServices.deleteStepbyTutorialId(
+            req.app.get('db'),
+            req.params.tutorial_id
+        )
+
             .then(() => {
                 res.status(204).end()
             })
             .catch(next)
+        StepsServices.delete()
     })
     .patch(jsonParser, (req, res, next) => {
         const { name, userid } = req.body
