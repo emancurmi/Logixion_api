@@ -5,6 +5,7 @@ CREATE TABLE public.tbl_tours_steps
     placement text NOT NULL,
     title text NOT NULL,
     content text NOT NULL,
+    tutorialid integer NOT NULL,
     PRIMARY KEY (id)
 );
 
