@@ -19,6 +19,8 @@ app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
 }))
 
 app.use(cors())
+//<--- fix here ---> 
+
 app.use(helmet())
 //app.use(validateBearerToken)
 
