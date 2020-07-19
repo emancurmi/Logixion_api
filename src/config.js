@@ -1,5 +1,5 @@
 module.exports = {
-    ADDRESS: "https://logixon.herokuapp.com/api/",
+    ADDRESS: "https://logixon.herokuapp.com",
     PORT: process.env.PORT || 8000,
     NODE_ENV: process.env.NODE_ENV || 'development',
     API_TOKEN: process.env.API_TOKEN || '7b967bbe-afc2-11ea-b3de-0242ac130004',
