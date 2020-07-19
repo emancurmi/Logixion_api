@@ -2,7 +2,7 @@ let Script = {
     getjavascript() {
         return (
             `
-
+<script>
 var bind = function (fn, me) { return function () { return fn.apply(me, arguments); }; };
 
 (function (window, factory) {
@@ -995,7 +995,59 @@ var bind = function (fn, me) { return function () { return fn.apply(me, argument
     })();
     return Tour;
 });
+</script>
 
+`
+        )
+    },
+
+
+    getcssscript() {
+        return (
+            `
+<style>
+.tour-backdrop {
+    position: absolute;
+    z-index: 1100;
+    background-color: #000;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+.popover[class*="tour-"] {
+    z-index: 1102;
+}
+
+    .popover[class*="tour-"] .popover-navigation {
+        padding: 9px 14px;
+        overflow: hidden;
+    }
+
+        .popover[class*="tour-"] .popover-navigation *[data-role="end"] {
+            float: right;
+        }
+
+        .popover[class*="tour-"] .popover-navigation *[data-role="prev"],
+        .popover[class*="tour-"] .popover-navigation *[data-role="next"],
+        .popover[class*="tour-"] .popover-navigation *[data-role="end"] {
+            cursor: pointer;
+        }
+
+            .popover[class*="tour-"] .popover-navigation *[data-role="prev"].disabled,
+            .popover[class*="tour-"] .popover-navigation *[data-role="next"].disabled,
+            .popover[class*="tour-"] .popover-navigation *[data-role="end"].disabled {
+                cursor: default;
+            }
+
+    .popover[class*="tour-"].orphan {
+        position: fixed;
+        margin-top: 0;
+    }
+
+        .popover[class*="tour-"].orphan .arrow {
+            display: none;
+        }
+</style>
 `
         )
     }
