@@ -1,5 +1,8 @@
-let script = () => {
-    `
+let script = {
+
+    getjavascript() {
+        return (
+            `
 
 var bind = function (fn, me) { return function () { return fn.apply(me, arguments); }; };
 
@@ -995,6 +998,8 @@ var bind = function (fn, me) { return function () { return fn.apply(me, argument
 });
 
 `
+        )
+    }
 }
 
 module.exports = script;
