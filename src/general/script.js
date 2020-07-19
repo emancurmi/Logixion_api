@@ -1,3 +1,6 @@
+let script = () => {
+    `
+
 var bind = function (fn, me) { return function () { return fn.apply(me, arguments); }; };
 
 (function (window, factory) {
@@ -990,3 +993,8 @@ var bind = function (fn, me) { return function () { return fn.apply(me, argument
     })();
     return Tour;
 });
+
+`
+}
+
+module.exports = script;

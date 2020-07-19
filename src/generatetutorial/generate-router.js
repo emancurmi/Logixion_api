@@ -1,7 +1,9 @@
-const path = require('path')
-const express = require('express')
-const GenerateTutorialRouter = express.Router()
-const { ADDRESS } = require('../config')
+const path = require('path');
+const express = require('express');
+const GenerateTutorialRouter = express.Router();
+const { ADDRESS } = require('../config');
+
+const Script = require('../general/script');
 
 const fetch = require('node-fetch');
 
@@ -20,7 +22,12 @@ GenerateTutorialRouter
                 let steps_url = ADDRESS + "/api/steps/?tutorialid=" + tutorial_json.id;
                 console.log(steps_url);
 
-                let script = ""
+                let script = "";
+
+                //head css
+                script += Script.script;
+                console.log(script);
+
                 fetch(steps_url, settings)
                     .then(res => res.json())
                     .then((steps_json) => {
