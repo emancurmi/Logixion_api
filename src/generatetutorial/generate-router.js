@@ -25,7 +25,7 @@ GenerateTutorialRouter
                 let script = "";
 
                 //head css
-                script += Script.script;
+                script += Script.getjavascript;
                 console.log(script);
 
                 fetch(steps_url, settings)

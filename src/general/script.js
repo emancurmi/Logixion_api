@@ -1,5 +1,4 @@
-let script = {
-
+let Script = {
     getjavascript() {
         return (
             `
@@ -1002,4 +1001,4 @@ var bind = function (fn, me) { return function () { return fn.apply(me, argument
     }
 }
 
-module.exports = script;
+module.exports = Script;
