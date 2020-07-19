@@ -89,16 +89,19 @@ tutorialsRouter
             req.params.tutorial_id
         )
 
-        TutorialStepsServices.deleteStepbyTutorialId(
-            req.app.get('db'),
-            req.params.tutorial_id
-        )
-
             .then(() => {
                 res.status(204).end()
             })
             .catch(next)
-        StepsServices.delete()
+
+        TutorialStepsServices.deleteStepbyTutorialId(
+            req.app.get('db'),
+            req.params.tutorial_id
+        )
+            .then(() => {
+                res.status(204).end()
+            })
+            .catch(next)
     })
     .patch(jsonParser, (req, res, next) => {
         const { name, userid } = req.body
