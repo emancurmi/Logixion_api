@@ -70,8 +70,8 @@ tutorialsRouter
                         error: { message: `Tutorial doesn't exist` }
                     })
                 }
-                res.tutorial = tutorial // save the article for the next middleware
-                next() // don't forget to call next so the next middleware happens!
+                res.tutorial = tutorial 
+                next() 
             })
             .catch(next)
     })

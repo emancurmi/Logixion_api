@@ -43,7 +43,7 @@ app.use('/api/steps', stepsRouter)
 app.use('/api/generatetutorial', GenerateTutorialRouter)
 
 app.get('/', (req, res) => {
-    res.send('Hello, world!')
+    res.send('Server Online!')
 })
 
 app.use(errorHandler)
