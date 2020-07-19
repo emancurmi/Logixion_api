@@ -25,9 +25,9 @@ GenerateTutorialRouter
                 let script = "";
 
                 //head css
-                script += Script.getjavascript;
+                script += Script.getjavascript();
 
-                script += Script.getcssscript;
+                script += Script.getcssscript();
 
                 fetch(steps_url, settings)
                     .then(res => res.json())
