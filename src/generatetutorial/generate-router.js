@@ -10,14 +10,14 @@ GenerateTutorialRouter
     .get((req, res, next) => {
         tutorialid = req.params.tutorial_id;
 
-        let tutorial_url = ADDRESS + ":8000/api/tutorials/" + tutorialid;
+        let tutorial_url = ADDRESS + "/tutorials/" + tutorialid;
 
         let settings = { method: "Get" };
 
         fetch(tutorial_url, settings)
             .then(res => res.json())
             .then((tutorial_json) => {
-                let steps_url = ADDRESS + ":8000/api/steps/?tutorialid=" + tutorial_json.id;
+                let steps_url = ADDRESS + "/steps/?tutorialid=" + tutorial_json.id;
                 let script = ""
                 fetch(steps_url, settings)
                     .then(res => res.json())
