@@ -14,7 +14,11 @@ const tutorialsRouter = require('./tutorials/tutorials-router')
 const stepsRouter = require('./steps/steps-router')
 const GenerateTutorialRouter = require('./generatetutorial/generate-router')
 
-let whitelist = ['http://localhost:3000', 'https://logixion-app.vercel.app']
+let whitelist = [
+    'http://localhost:8000',
+    'http://localhost:3000',
+    'https://logixion-app.vercel.app',
+    'https://logixon.herokuapp.com']
 
 app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
     skip: () => NODE_ENV === 'test'
@@ -43,7 +47,7 @@ app.use('/api/steps', stepsRouter)
 app.use('/api/generatetutorial', GenerateTutorialRouter)
 
 app.get('/', (req, res) => {
-    res.send('Server Online!')
+    res.send('Yippie!! Server Online in ' + NODE_ENV + ' mode!');
 })
 
 app.use(errorHandler)

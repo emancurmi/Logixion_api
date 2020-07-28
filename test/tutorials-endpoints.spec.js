@@ -15,9 +15,9 @@ describe('Tutorials Endpoints', () => {
 
     after('disconnect from db', () => db.destroy())
 
-    //before('cleanup', () => db('logixion_tutorials').truncate())
+    before('cleanup', () => db('logixion_tutorials').truncate())
 
-    //afterEach('cleanup', () => db('logixion_tutorials').truncate())
+    afterEach('cleanup', () => db('logixion_tutorials').truncate())
 
     //describe(`Unauthorized requests`, () => {
     //    const testBookmarks = fixtures.makeBookmarksArray()
@@ -44,7 +44,7 @@ describe('Tutorials Endpoints', () => {
     //    it(`responds with 401 Unauthorized for GET /tutroials/:id`, () => {
     //        const secondBookmark = testBookmarks[1]
     //        return supertest(app)
-    //            .get(`/tutorials/${secondBookmark.id}`)
+    //            .get(`/tutorials/${secondBookmark.id}`)A
     //            .expect(401, { error: 'Unauthorized request' })
     //    })
 
@@ -61,48 +61,48 @@ describe('Tutorials Endpoints', () => {
             it(`responds with 200 and an empty list`, () => {
                 return supertest(app)
                     .get('/api/tutorials')
-                    //.set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+                    .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
                     .expect(200, [])
             })
         })
 
-    //    context('Given there are tutorials in the database', () => {
-    //        const testBookmarks = fixtures.makeBookmarksArray()
+        context('Given there are tutorials in the database', () => {
+            const testBookmarks = fixtures.makeBookmarksArray()
 
-    //        beforeEach('insert tutorials', () => {
-    //            return db
-    //                .into('tutorials')
-    //                .insert(testBookmarks)
-    //        })
+            beforeEach('insert tutorials', () => {
+                return db
+                    .into('logixion_tutorials')
+                    .insert(testBookmarks)
+            })
 
-    //        it('gets the tutorials from the store', () => {
-    //            return supertest(app)
-    //                .get('/tutorials')
-    //                .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-    //                .expect(200, testBookmarks)
-    //        })
-    //    })
+            it('gets the tutorials from the store', () => {
+                return supertest(app)
+                    .get('/tutorials')
+                    .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+                    .expect(200, testBookmarks)
+            })
+        })
 
-    //    //context(`Given an XSS attack bookmark`, () => {
-    //    //    const { maliciousBookmark, expectedBookmark } = fixtures.makeMaliciousBookmark()
+        //context(`Given an XSS attack bookmark`, () => {
+        //    const { maliciousBookmark, expectedBookmark } = fixtures.makeMaliciousBookmark()
 
-    //    //    beforeEach('insert malicious bookmark', () => {
-    //    //        return db
-    //    //            .into('bookmarks')
-    //    //            .insert([maliciousBookmark])
-    //    //    })
+        //    beforeEach('insert malicious bookmark', () => {
+        //        return db
+        //            .into('bookmarks')
+        //            .insert([maliciousBookmark])
+        //    })
 
-    //    //    it('removes XSS attack content', () => {
-    //    //        return supertest(app)
-    //    //            .get(`/bookmarks`)
-    //    //            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-    //    //            .expect(200)
-    //    //            .expect(res => {
-    //    //                expect(res.body[0].title).to.eql(expectedBookmark.title)
-    //    //                expect(res.body[0].description).to.eql(expectedBookmark.description)
-    //    //            })
-    //    //    })
-    //    //})
+        //    it('removes XSS attack content', () => {
+        //        return supertest(app)
+        //            .get(`/bookmarks`)
+        //            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+        //            .expect(200)
+        //            .expect(res => {
+        //                expect(res.body[0].title).to.eql(expectedBookmark.title)
+        //                expect(res.body[0].description).to.eql(expectedBookmark.description)
+        //            })
+        //    })
+        //})
     })
 
     //describe('GET /tutorials/:id', () => {
