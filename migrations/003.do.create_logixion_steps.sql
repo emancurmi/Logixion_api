@@ -1,6 +1,6 @@
 CREATE TABLE public.tbl_tours_steps
 (
-    id integer NOT NULL,
+    id integer identity(1,1) NOT NULL,
     element text NOT NULL,
     placement text NOT NULL,
     title text NOT NULL,
