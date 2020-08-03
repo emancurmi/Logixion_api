@@ -125,13 +125,13 @@ describe('Tutorials Endpoints', () => {
 
     describe('POST /api/tutorials', () => {
         it(`responds with 400 missing 'name' if not supplied`, () => {
-            const newBookmarkMissingTitle = {
+            const newTutorialMissingTitle = {
                 //name: "DefaultTutorial",
                 userid: 1
             }
             return supertest(app)
                 .post(`/api/tutorials`)
-                .send(newBookmarkMissingTitle)
+                .send(newTutorialMissingTitle)
                 .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
                 .expect(400, {
                     error: { message: `Missing 'name' in request body` }
