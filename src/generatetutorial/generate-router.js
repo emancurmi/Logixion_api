@@ -32,7 +32,7 @@ GenerateTutorialRouter
                 fetch(steps_url, settings)
                     .then(res => res.json())
                     .then((steps_json) => {
-                        script += "<script>";
+                        script += "<p>";
                         script += "function " + tutorial_json.name + "() {";
                         script += "var tour = new Tour({ storage: false });";
                         script += "tour.addSteps([";
@@ -48,7 +48,7 @@ GenerateTutorialRouter
                         script += "tour.init();";
                         script += "tour.start()";
                         script += "}";
-                        script += "</script>";
+                        script += "</p>";
 
                         res.send(script);
                     })
