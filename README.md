@@ -33,7 +33,6 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-* [Usage](#usage)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -50,8 +49,8 @@
 
 ### Built With
 
-* [] Node Js
-* [] Postgres
+* NodeJs
+* Postgres
 
 
 
@@ -80,16 +79,6 @@ npm install
 ```
 
 
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-
 <!-- ROADMAP -->
 ## Roadmap
 
@@ -110,17 +99,10 @@ Contributions are what make the open source community such an amazing place to b
 
 
 
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@curmieman](https://twitter.com/curmieman) - emancurmi@gmail.com
+Eman Curmi - [@curmieman](https://twitter.com/curmieman) - emancurmi@gmail.com
 
 Project Link: [https://github.com/emancurmi/Logixion_api](https://github.com/emancurmi/Logixion_api)
 
@@ -129,4 +111,4 @@ Project Link: [https://github.com/emancurmi/Logixion_api](https://github.com/ema
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* [](Manish Poduval) - https://github.com/ManishPoduval
+* (Manish Poduval) - https://github.com/ManishPoduval
