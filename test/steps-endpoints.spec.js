@@ -4,7 +4,7 @@ const app = require('../src/app')
 
 describe('Steps Endpoints', () => {
     let db
-
+    
     before('make knex instance', () => {
         db = knex({
             client: 'pg',

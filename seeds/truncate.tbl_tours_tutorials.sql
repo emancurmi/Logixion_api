@@ -1,0 +1,1 @@
+TRUNCATE tbl_tours_tutorials;

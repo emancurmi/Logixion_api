@@ -1,4 +1,4 @@
-INSERT INTO logixion_steps (id, element, placement, title, content, tutorialid)
+INSERT INTO tbl_tours_steps (id, element, placement, title, content, tutorialid)
 VALUES(1,".step-one","bottom","step1","this is 1",3),
 (2,".step3","top","step2","this is step 2",2),
 (3,".step-two","bottom","step3","this is 3",3),
