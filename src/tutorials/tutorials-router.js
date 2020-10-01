@@ -1,7 +1,7 @@
 const path = require('path')
 const express = require('express')
 const TutorialsServices = require('./tutorials-service')
-const TutorialStepsServices = require('../tutorialsteps/tutorialsteps-service')
+//const TutorialStepsServices = require('../tutorialsteps/tutorialsteps-service')
 
 const tutorialsRouter = express.Router()
 const jsonParser = express.json()
@@ -94,7 +94,7 @@ tutorialsRouter
             })
             .catch(next)
 
-        TutorialStepsServices.deleteStepbyTutorialId(
+        TutorialsServices.deleteStepsinTutorial(
             req.app.get('db'),
             req.params.tutorial_id
         )

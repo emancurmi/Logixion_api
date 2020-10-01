@@ -25,11 +25,13 @@ const TutorialsServices = {
         return knex('tbl_tours_tutorials')
             .where({ id })
             .delete()
+        
+    },
+    deleteStepsinTutorial(knex, id) {
         return knex('tbl_tours_steps')
             .delete()
             .where('tutorialid', { id })
     },
-
     updateTutorial(knex, id, newTutorialFields) {
         return knex('tbl_tours_tutorials')
             .where({ id })
