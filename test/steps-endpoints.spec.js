@@ -19,6 +19,56 @@ describe('Steps Endpoints', () => {
 
     afterEach('cleanup', () => db('tbl_tours_steps').truncate())
 
+    describe('POST /api/steps', () => {
+        it(`responds with 400 missing 'name' if not supplied`, () => {
+            const newStepMissingTitle = {
+                //element: ".step-one",
+                placement: "bottom",
+                title: "1",
+                content: "1",
+                tutorialid: 31
+            }
+            return supertest(app)
+                .post(`/api/steps`)
+                .send(newStepMissingTitle)
+                .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+                .expect(400, {
+                    error: { message: `Missing 'element' in request body` }
+                })
+        })
+
+        it('adds a new steps to the store', () => {
+            const newStep = {
+                element: ".step-one",
+                placement: "bottom",
+                title: "1",
+                content: "1",
+                tutorialid: 31
+            }
+            return supertest(app)
+                .post(`/api/steps`)
+                .send(newStep)
+                .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+                .expect(201)
+                .expect(res => {
+                    expect(res.body.element).to.eql(newStep.element)
+                    expect(res.body.placement).to.eql(newStep.placement)
+                    expect(res.body.title).to.eql(newStep.title)
+                    expect(res.body.content).to.eql(newStep.content)
+                    expect(res.body.tutorialid).to.eql(newStep.tutorialid)
+
+                    expect(res.body).to.have.property('id')
+                    expect(res.headers.location).to.eql(`/api/steps/${res.body.id}`)
+                })
+                .then(res =>
+                    supertest(app)
+                        .get(`/api/steps/${res.body.id}`)
+                        .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+                        .expect(res.body)
+                )
+        })
+    })
+
     describe('GET /api/steps', () => {
         context(`Given no steps`, () => {
 
@@ -51,7 +101,7 @@ describe('Steps Endpoints', () => {
 
     describe('GET /api/steps/:id', () => {
         context(`Given no steps`, () => {
-            it(`responds 404 whe bookmark doesn't exist`, () => {
+            it(`responds 404 when step doesn't exist`, () => {
                 return supertest(app)
                     .get(`/api/steps/123`)
                     .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
@@ -123,53 +173,5 @@ describe('Steps Endpoints', () => {
         })
     })
 
-    describe('POST /api/steps', () => {
-        it(`responds with 400 missing 'name' if not supplied`, () => {
-            const newStepMissingTitle = {
-                //element: ".step-one",
-                placement: "bottom",
-                title: "1",
-                content: "1",
-                tutorialid: 31 
-            }
-            return supertest(app)
-                .post(`/api/steps`)
-                .send(newStepMissingTitle)
-                .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-                .expect(400, {
-                    error: { message: `Missing 'element' in request body` }
-                })
-        })
 
-        it('adds a new steps to the store', () => {
-            const newStep = {
-                element: ".step-one",
-                placement: "bottom",
-                title: "1",
-                content: "1",
-                tutorialid: 31 
-            }
-            return supertest(app)
-                .post(`/api/steps`)
-                .send(newStep)
-                .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-                .expect(201)
-                .expect(res => {
-                    expect(res.body.element).to.eql(newStep.element)
-                    expect(res.body.placement).to.eql(newStep.placement)
-                    expect(res.body.title).to.eql(newStep.title)
-                    expect(res.body.content).to.eql(newStep.content)
-                    expect(res.body.tutorialid).to.eql(newStep.tutorialid)
-
-                    expect(res.body).to.have.property('id')
-                    expect(res.headers.location).to.eql(`/api/steps/${res.body.id}`)
-                })
-                .then(res =>
-                    supertest(app)
-                        .get(`/api/steps/${res.body.id}`)
-                        .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-                        .expect(res.body)
-                )
-        })
-    })
 })
